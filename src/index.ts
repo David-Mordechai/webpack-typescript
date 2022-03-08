@@ -1,6 +1,11 @@
+import "reflect-metadata";
+import { myContainer } from "../inversify.config";
+
 import { Ion, Viewer, createWorldTerrain, createOsmBuildings, Cartesian3, HorizontalOrigin, VerticalOrigin, NearFarScalar} from "cesium";
 import "cesium/Widgets/widgets.css";
 import "../src/index.css"
+import { IMyClass } from "./DI/IMyClass";
+import { TYPES } from "./DI/TYPES";
 
 // This is the default access token
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk';
@@ -32,3 +37,6 @@ viewer.scene.primitives.add(createOsmBuildings());
 viewer.camera.flyTo({
   destination : Cartesian3.fromDegrees(34.97024, 32.80687, 50000),
 });
+
+var myClasss = myContainer.get<IMyClass>(TYPES.IMyClass);
+myClasss.doWork();
