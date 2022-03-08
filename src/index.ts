@@ -1,12 +1,7 @@
-import "reflect-metadata"; // need this for DI container
-import { myContainer } from "../inversify.config";
-import { Ion, Viewer, createWorldTerrain, createOsmBuildings, Cartesian3, Math } from "cesium";
+import { Ion, Viewer, createWorldTerrain, createOsmBuildings, Cartesian3, HorizontalOrigin, VerticalOrigin, NearFarScalar} from "cesium";
 import "cesium/Widgets/widgets.css";
 import "../src/index.css"
-import { IMyClass } from "./DI/IMyClass";
-import { TYPES } from "./DI/TYPES";
 
-// Your access token can be found at: https://cesium.com/ion/tokens.
 // This is the default access token
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYWE1OWUxNy1mMWZiLTQzYjYtYTQ0OS1kMWFjYmFkNjc5YzciLCJpZCI6NTc3MzMsImlhdCI6MTYyNzg0NTE4Mn0.XcKpgANiY19MC4bdFUXMVEBToBmqS8kuYpUlxJHYZxk';
 
@@ -15,17 +10,25 @@ const viewer = new Viewer('cesiumContainer', {
   terrainProvider: createWorldTerrain()
 });
 
+viewer.entities.add({
+    position: Cartesian3.fromDegrees(34.97024, 32.80687, 50),
+    billboard: {
+        image: "../AeroAssets/drone.png",
+        width: 25, 
+        height: 25,
+        horizontalOrigin: HorizontalOrigin.CENTER,
+        verticalOrigin: VerticalOrigin.BOTTOM,
+        pixelOffsetScaleByDistance: new NearFarScalar(
+            1.0e3,
+            1.0,
+            1.5e6,
+            0.0),
+    },
+  });
+
 // Add Cesium OSM Buildings, a global 3D buildings layer.
 viewer.scene.primitives.add(createOsmBuildings());   
 
-// Fly the camera to San Francisco at the given longitude, latitude, and height.
 viewer.camera.flyTo({
-  destination : Cartesian3.fromDegrees(-122.4175, 37.655, 400),
-  orientation : {
-    heading : Math.toRadians(0.0),
-    pitch : Math.toRadians(-15.0),
-  }
+  destination : Cartesian3.fromDegrees(34.97024, 32.80687, 50000),
 });
-
-var myClasss = myContainer.get<IMyClass>(TYPES.IMyClass);
-myClasss.doWork();
