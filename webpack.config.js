@@ -62,4 +62,5 @@ module.exports = {
         // Enable webpack-friendly use of require in Cesium
         toUrlUndefined: true
     },
+    devtool: "source-map"
 };
