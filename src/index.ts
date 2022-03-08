@@ -1,6 +1,10 @@
+import "reflect-metadata"; // need this for DI container
+import { myContainer } from "../inversify.config";
 import { Ion, Viewer, createWorldTerrain, createOsmBuildings, Cartesian3, Math } from "cesium";
 import "cesium/Widgets/widgets.css";
 import "../src/index.css"
+import { IMyClass } from "./DI/IMyClass";
+import { TYPES } from "./DI/TYPES";
 
 // Your access token can be found at: https://cesium.com/ion/tokens.
 // This is the default access token
@@ -22,3 +26,6 @@ viewer.camera.flyTo({
     pitch : Math.toRadians(-15.0),
   }
 });
+
+var myClasss = myContainer.get<IMyClass>(TYPES.IMyClass);
+myClasss.doWork();
