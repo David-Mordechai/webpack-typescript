@@ -41,7 +41,7 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-                //{ from: "src/index.html", to: "index.html"},
+                { from: "AeroAssets", to: "AeroAssets"},
                 { from: path.join(cesiumSource, cesiumWorkers), to: 'Workers' },
                 { from: path.join(cesiumSource, 'Assets'), to: 'Assets' },
                 { from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }
