@@ -31,7 +31,8 @@ module.exports = {
     resolve:{
         extensions: [".tsx", ".ts", ".js"],
         alias: {
-            cesium: path.resolve(__dirname, cesiumSource)
+            cesium: path.resolve(__dirname, cesiumSource),
+            rxjs: path.resolve(__dirname, 'node_modules/rxjs/dist')
         },
         mainFiles: ['index', 'Cesium']
     },
